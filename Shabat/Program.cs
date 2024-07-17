@@ -22,6 +22,8 @@ namespace Shabat
             string Conn = config["connectionstring"];
             DBconnections dBconnections = new DBconnections(Conn);
             CategoryRepository ca = new CategoryRepository(dBconnections);
+            SeedService seedService = new SeedService(dBconnections);
+            seedService.EnsureTablesAndSeedData();
             Application.Run(new HomePage(ca));
         }
     }

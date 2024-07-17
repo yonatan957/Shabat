@@ -111,13 +111,13 @@ namespace Shabat.DAL
 
         private string SqlEscape(string input)
         {
-            // Simple SQL escape method to avoid basic SQL injection
+            
             return input.Replace("'", "''");
         }
         public void CheckConnectionToDefaultDB(string dbName)
         {
             CheckConnection();
-            // Construct the query to check for the existence of the database by name in the system catalog
+            //בודק האם קיים דאטאבייס בשם זה
             string query = $"SELECT db_id('{SqlEscape(dbName)}');";
 
             DataTable result = ExecuteQuery(query, null!);

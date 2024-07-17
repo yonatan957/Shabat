@@ -24,21 +24,27 @@ namespace Shabat.forms
         }
         public void LoadCategories(List<CategotryModel> categories)
         {
-            listView1.Items.Clear();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("CategoryName");
             foreach (CategotryModel category in categories)
             {
-                List<string> values = new List<string>();
-                values.Add(category.CategoryName);
-                values.Add($"{category.CategoryID}");
-                ListViewItem item = new ListViewItem(String.Join(" - ", values));
-                listView1.Items.Add(item);
+                DataRow dataRow = dt.NewRow();
+                dataRow["CategoryName"] = category.CategoryName;
+                dt.Rows.Add(dataRow);
             }
+            dataGridView1.DataSource = dt;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void button_Add_Click(object sender, EventArgs e)
         {
-            _categoryRepository.insert(new CategotryModel(textBox_add.Text));
+            bool ressult =  _categoryRepository.insert(new CategotryModel(textBox_add.Text));
+            if (!ressult)
+            {
+                MessageBox.Show("its allready exist");
+            }
             LoadCategories(_categoryRepository.FindAll());
+            textBox_add.Clear();
         }
     }
 }
