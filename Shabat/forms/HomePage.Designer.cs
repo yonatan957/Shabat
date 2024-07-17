@@ -28,19 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listView1 = new ListView();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             textBox_add = new TextBox();
             button_Add = new Button();
             label1 = new Label();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // listView1
-            // 
-            listView1.Location = new Point(189, 246);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(388, 182);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
             // 
             // textBox_add
             // 
@@ -68,26 +62,44 @@
             label1.TabIndex = 3;
             label1.Text = "new category";
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.Location = new Point(188, 261);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RightToLeft = RightToLeft.Yes;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(388, 188);
+            dataGridView1.TabIndex = 4;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 486);
+            Controls.Add(dataGridView1);
             Controls.Add(label1);
             Controls.Add(button_Add);
             Controls.Add(textBox_add);
-            Controls.Add(listView1);
             Name = "HomePage";
             Text = "HomePage";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ListView listView1;
         private TextBox textBox_add;
         private Button button_Add;
         private Label label1;
+        private DataGridView dataGridView1;
     }
 }

@@ -18,7 +18,7 @@ namespace Shabat.DAL
         public void EnsureTablesAndSeedData()
         {
             string sqlQuery = @"use Shabat;
-                                go
+                                
                                 DECLARE @TableCreated INT = 0;
 
                                 BEGIN TRANSACTION;
@@ -41,8 +41,10 @@ namespace Shabat.DAL
                                         ID INT IDENTITY(1,1),
                                         GuestID INT, 
                                         CategoryID INT,
+                                        FoodName NVARCHAR(50),
                                         FOREIGN KEY(GuestID) REFERENCES Guest(ID),
-                                        FOREIGN KEY(CategoryID) REFERENCES Categories(ID)
+                                        FOREIGN KEY(CategoryID) REFERENCES Categories(ID),
+                                        UNIQUE (GuestID, FoodName)
                                         )
                                             INSERT INTO Categories (Name)
                                             VALUES (N'דגים'), (N'בשר'), (N'משקאות'), (N'סלטים'), (N'קינוחים');
@@ -57,12 +59,11 @@ namespace Shabat.DAL
 	                                END CATCH
                                 SELECT @TableCreated AS IsCreated;";
             _dbconnections.ExecuteNoneQuery(sqlQuery, null);
-            DataTable ressult = _dbconnections.ExecuteQuery("select count(*) ad test from Categories;", null);
+            DataTable ressult = _dbconnections.ExecuteQuery("select count(*) as test from Categories;", null);
             if (ressult.Rows.Count <= 0)
             {
                 throw new Exception("seed failed...");
             }       
-
         }
     }   
 }

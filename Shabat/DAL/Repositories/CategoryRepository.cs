@@ -22,7 +22,7 @@ namespace Shabat.DAL.Repositories
         public List<CategotryModel> FindAll()
         {
             var categories = new List<CategotryModel>();
-            string query = "select * from Categories";
+            string query = "select * from Categories order by Categories.ID";
             DataTable ressult = DBconnections.ExecuteQuery(query, null);
             foreach (DataRow dr in ressult.Rows)
             {
@@ -31,17 +31,17 @@ namespace Shabat.DAL.Repositories
             return categories;
         }
 
-        public CategotryModel FindByID(int id)
+        public CategotryModel FindByName(string Name)
         {
-            string query = "select * form Categories c where c.ID = @ID";
+            string query = "select * form Categories c where c.Name = @Name";
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@ID", id)
+                new SqlParameter("@Name", Name)
             }; 
             DataTable ressult = DBconnections.ExecuteQuery(query, sqlParameters);
             if (ressult.Rows.Count <= 0)
             {
-                throw new Exception("invalid id");
+                throw new Exception("invalid Name");
             }
             return new CategotryModel(ressult.Rows[0]);
         }
